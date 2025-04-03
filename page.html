@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Registration Numbers</title>
+    <style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        background-color: #b6b4b4;
+        color: #333;
+        margin: 0;
+        padding: 20px;
+    }
+    h2 {
+        color: #222;
+    }
+    table {
+        width: 60%;
+        margin: 20px auto;
+        border-collapse: collapse;
+        background-color: #d9d9d9;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        color: #111;
+    }
+    th, td {
+        border: 1px solid #666;
+        padding: 12px;
+        cursor: pointer;
+        font-size: 18px;
+    }
+    td:hover {
+        background-color: #b0afaf;
+    }
+    #seatInfo {
+        margin-top: 20px;
+        font-size: 20px;
+        color: #444;
+        font-weight: bold;
+    }
+    button {
+        margin-top: 20px;
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: #555;
+        color: white;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+    button:hover {
+        background-color: #444;
+    }
+    
+    </style>
+</head>
+<body>
+    <h2>Random Registration Number Table</h2>
+    <table id="regTable"></table>
+    <div id="seatInfo">Click on a cell to see its seat number.</div>
+    <button onclick="generateTable()">Reset Table</button>
+
+    <script>
+        const prefixes = ['23BCE', '23BAI', '23BCT', '23BEC', '23BBS'];
+        const rows = 10, cols = 7;
+        const table = document.getElementById("regTable");
+        
+        function generateTable() {
+            table.innerHTML = "";
+            for (let i = 0; i < rows; i++) {
+                let row = table.insertRow();
+                for (let j = 0; j < cols; j++) {
+                    let cell = row.insertCell();
+                    let prefix = prefixes[Math.floor(Math.random() * prefixes.length)];
+                    let number = Math.floor(1000 + Math.random() * 9000);
+                    cell.textContent = prefix + number;
+                    
+                    cell.addEventListener("click", function() {
+                        document.getElementById("seatInfo").innerHTML= `You clicked on Seat: Row ${i + 1}, Column ${j + 1}<br></br>
+                         Registration number: ${cell.textContent}`;
+                    });
+                }
+            }
+        }
+
+        generateTable();
+    </script>
+</body>
+</html>
